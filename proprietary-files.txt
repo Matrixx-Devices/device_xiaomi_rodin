@@ -1,4 +1,7 @@
-# Unpinned blobs from missi-user 15 AP3A.240905.015.A2 OS2.0.204.0.VOJMIXM release-keys
+# All blobs from missi-user 16 BP2A.250605.031.A3 OS3.0.10.0.WOJMIXM release-keys, unless pinned
+
+# AEE
+vendor/lib64/libaedv.so
 
 # AAL
 vendor/lib64/libaal_cust.so
@@ -381,6 +384,7 @@ odm/lib64/camera/zsl/com.xiaomi.zsl.dsac.so
 odm/lib64/camera/zsl/com.xiaomi.zsl.hdr.so
 odm/lib64/libHISCppAlgos.so
 odm/lib64/libMiEmojiEffect.so
+odm/lib64/libMiPhotoFilter.so
 odm/lib64/libMiVideoFilter.so
 odm/lib64/libalCFR.so
 odm/lib64/libanc_dc_base.so
@@ -437,7 +441,6 @@ vendor/lib64/libAF.so
 vendor/lib64/libBasicModule.so
 vendor/lib64/libJpgEncPipe.so
 vendor/lib64/libMiMotion.so
-vendor/lib64/libMiPhotoFilter.so
 vendor/lib64/libXMFaceFocus.so
 vendor/lib64/libaaa_aaautil.so
 vendor/lib64/libaaa_afassist_V2.so
@@ -1388,6 +1391,7 @@ vendor/firmware/txpowerctrl.cfg
 vendor/firmware/v1_fac_fld_coef.bin
 vendor/firmware/v1_fac_fld_config.bin
 vendor/firmware/wifi.cfg
+vendor/lib64/libwifi-hal.so:vendor/lib64/libwifi-hal-mtk.so;FIX_SONAME
 
 # Fuel Gauge
 vendor/bin/fuelgauged

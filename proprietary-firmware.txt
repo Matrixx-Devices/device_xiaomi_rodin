@@ -1,4 +1,4 @@
-# Unpinned blobs from missi-user 15 AP3A.240905.015.A2 OS2.0.204.0.VOJMIXM release-keys
+# All blobs from missi-user 16 BP2A.250605.031.A3 OS3.0.10.0.WOJMIXM release-keys
 apusys.img;AB
 audio_dsp.img;AB
 ccu.img;AB
