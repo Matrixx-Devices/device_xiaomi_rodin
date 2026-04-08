@@ -1,0 +1,94 @@
+From f29f32044d5e21c8e44ba28d03753f289ae45c13 Mon Sep 17 00:00:00 2001
+From: claxten10 <claxten10@gmail.com>
+Date: Sat, 28 Mar 2026 04:42:58 +0000
+Subject: [PATCH] Aperture: Allow disabling video stabilization
+
+* When using video stabilization in some devices (such as rodin and malachite), we encounter
+  stretched video recordings and camera stack crashes when trying to record with ultrawide or
+  macro camera.
+
+* Allow disabling video stabilization by setting config_enableVideoStabilization to false in
+  the Aperture overlay, by default it is set to true to retain default functionality.
+
+Change-Id: I1091fdf5483bb70f3fa50f676cde59583c33b9fd
+Signed-off-by: claxten10 <claxten10@gmail.com>
+Co-Authored-By: Ido <dev.xyzuniverse@gmail.com>
+---
+ .../org/lineageos/aperture/CameraActivity.kt  | 22 +++++++++++--------
+ .../lineageos/aperture/SettingsActivity.kt    |  6 +++++
+ app/src/main/res/values/config.xml            |  3 +++
+ 3 files changed, 22 insertions(+), 9 deletions(-)
+
+diff --git a/app/src/main/java/org/lineageos/aperture/CameraActivity.kt b/app/src/main/java/org/lineageos/aperture/CameraActivity.kt
+index 22bbc95..9054c9b 100644
+--- a/app/src/main/java/org/lineageos/aperture/CameraActivity.kt
++++ b/app/src/main/java/org/lineageos/aperture/CameraActivity.kt
+@@ -1629,16 +1629,20 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
+                     }
+                 )
+                 .setVideoStabilizationMode(
+-                    when (cameraConfiguration) {
+-                        is CameraConfiguration.Video -> when (
+-                            cameraConfiguration.enableVideoStabilization
+-                        ) {
+-                            true -> VideoStabilizationMode.getMode(cameraConfiguration.camera)
+-                            false -> null
+-                        }
++                    if (!resources.getBoolean(R.bool.config_enableVideoStabilization)) {
++                        VideoStabilizationMode.OFF
++                    } else {
++                        when (cameraConfiguration) {
++                            is CameraConfiguration.Video -> when (
++                                cameraConfiguration.enableVideoStabilization
++                            ) {
++                                true -> VideoStabilizationMode.getMode(cameraConfiguration.camera)
++                                false -> null
++                            }
+ 
+-                        else -> null
+-                    } ?: VideoStabilizationMode.OFF
++                            else -> null
++                        } ?: VideoStabilizationMode.OFF
++                    }
+                 )
+                 .setEdgeMode(camera2Options.edgeMode)
+                 .setNoiseReductionMode(camera2Options.noiseReductionMode)
+diff --git a/app/src/main/java/org/lineageos/aperture/SettingsActivity.kt b/app/src/main/java/org/lineageos/aperture/SettingsActivity.kt
+index 9198171..6c6ad11 100644
+--- a/app/src/main/java/org/lineageos/aperture/SettingsActivity.kt
++++ b/app/src/main/java/org/lineageos/aperture/SettingsActivity.kt
+@@ -159,6 +159,9 @@ class SettingsActivity : AppCompatActivity(R.layout.activity_settings) {
+         }
+         private val saveLocation by lazy { findPreference<SwitchPreference>("save_location") }
+         private val shutterSound by lazy { findPreference<SwitchPreference>("shutter_sound") }
++        private val videoStabilization by lazy {
++            findPreference<SwitchPreference>("video_stabilization")
++        }
+ 
+         private val photoCaptureModePreferenceChangeListener =
+             Preference.OnPreferenceChangeListener { preference, newValue ->
+@@ -207,6 +210,9 @@ class SettingsActivity : AppCompatActivity(R.layout.activity_settings) {
+             }
+             shutterSound?.isVisible = !CameraSoundsUtils.mustPlaySounds
+ 
++            // Video stabilization mode
++            videoStabilization?.isVisible = resources.getBoolean(R.bool.config_enableVideoStabilization)
++
+             // Photo capture mode
+             photoCaptureMode.onPreferenceChangeListener = photoCaptureModePreferenceChangeListener
+             enableZsl.isEnabled = photoCaptureMode.value == "minimize_latency"
+diff --git a/app/src/main/res/values/config.xml b/app/src/main/res/values/config.xml
+index 1920aa1..ff16e98 100644
+--- a/app/src/main/res/values/config.xml
++++ b/app/src/main/res/values/config.xml
+@@ -84,4 +84,7 @@
+     <!-- Whether we should use high resolution output size or not.
+          See: StreamConfigurationMap.getHighResolutionOutputSizes() for more info. -->
+     <bool name="config_enableHighResolution">true</bool>
++
++    <!-- Enable video stabilization if supported. -->
++    <bool name="config_enableVideoStabilization">false</bool>
+ </resources>
+-- 
+2.54.0
+
