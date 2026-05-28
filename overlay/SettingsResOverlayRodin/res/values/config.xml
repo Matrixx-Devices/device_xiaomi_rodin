@@ -43,6 +43,8 @@
         <item>268</item> <!-- expert P3 -->
         <item>267</item> <!-- expert sRGB -->
     </integer-array>
+    <!-- Whether to use PowerProfile as the primary source for battery design capacity -->
+    <bool name="config_use_power_profile_for_battery_capacity">false</bool>
 
     <!-- The number of vibration intensity levels supported by the device.
          Note that this should correspond to the ability to vary the vibration amplitude, with
