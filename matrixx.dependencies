@@ -1,0 +1,32 @@
+[
+  {
+    "repository": "hardware_xiaomi",
+    "target_path": "hardware/xiaomi",
+    "revision": "16.2-rodin"
+  },
+  {
+    "repository": "vendor_xiaomi_rodin",
+    "target_path": "vendor/xiaomi/rodin",
+    "revision": "16.2"
+  },
+  {
+    "repository": "vendor_mediatek_ims",
+    "target_path": "vendor/mediatek/ims",
+    "revision": "16.2-rodin"
+  },
+  {
+    "repository": "hardware_mediatek",
+    "target_path": "hardware/mediatek",
+    "revision": "16.2-rodin"
+  },
+  {
+    "repository": "device_mediatek_sepolicy_vndr",
+    "target_path": "device/mediatek/sepolicy_vndr",
+    "revision": "16.2-rodin"
+  },
+  {
+    "repository": "device_xiaomi_rodin-kernel",
+    "target_path": "device/xiaomi/rodin-kernel",
+    "revision": "16.2"
+  }
+]
