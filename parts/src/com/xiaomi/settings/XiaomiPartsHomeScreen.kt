@@ -15,8 +15,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForwardIos
+import androidx.compose.material.icons.filled.MiscellaneousServices
 import androidx.compose.material.icons.filled.Fingerprint
-import androidx.compose.material.icons.filled.Speaker
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -76,8 +76,6 @@ fun XiaomiPartsHomeScreen(
                         text     = stringResource(R.string.xiaomi_parts_title),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
-                        // LargeTopAppBar provides 16dp start padding by default;
-                        // nudge by 4dp so the large title aligns with the 20dp card gutter.
                         modifier = Modifier.padding(start = 4.dp),
                     )
                 },
@@ -145,10 +143,26 @@ fun XiaomiPartsHomeScreen(
             item(key = "diag-label") { PartsCategory(stringResource(R.string.xiaomi_parts_category_diagnostics)) }
             item(key = "diag-card-1") {
                 PartsListItemCard(
+                    icon    = Icons.Filled.MiscellaneousServices,
+                    title   = stringResource(R.string.cit_calibration_title),
+                    summary = stringResource(R.string.cit_calibration_summary),
+                    shape   = topCardShape,
+                    horizontalGutter = horizontalGutter,
+                    onClick = {
+                        if (!CitLauncher.launchCitCalibration(context)) {
+                            PartsToast.show(context, R.string.cit_calibration_not_found)
+                        }
+                    },
+                )
+                Spacer(modifier = Modifier.height(2.dp))
+            }
+
+            item(key = "diag-card-2") {
+                PartsListItemCard(
                     icon    = Icons.Filled.Fingerprint,
                     title   = stringResource(R.string.fingerprint_calibration_title),
                     summary = stringResource(R.string.fingerprint_calibration_summary),
-                    shape   = topCardShape,
+                    shape   = bottomCardShape,
                     horizontalGutter = horizontalGutter,
                     onClick = {
                         if (!CitLauncher.launchFingerprintCalibration(context)) {
@@ -156,24 +170,9 @@ fun XiaomiPartsHomeScreen(
                         }
                     },
                 )
-                Spacer(modifier = Modifier.height(2.dp))
-            }
-            item(key = "diag-card-2") {
-                PartsListItemCard(
-                    icon    = Icons.Filled.Speaker,
-                    title   = stringResource(R.string.speaker_calibration_title),
-                    summary = stringResource(R.string.speaker_calibration_summary),
-                    shape   = bottomCardShape,
-                    horizontalGutter = horizontalGutter,
-                    onClick = {
-                        if (!CitLauncher.launchSpeakerCalibration(context)) {
-                            PartsToast.show(context, R.string.speaker_calibration_not_found)
-                        }
-                    },
-                )
             }
         }
-    }
+    } // <-- These were the missing brackets!
 }
 
 @Composable
@@ -182,7 +181,6 @@ fun PartsCategory(label: String) {
         text     = label,
         style    = MaterialTheme.typography.titleSmall,
         color    = MaterialTheme.colorScheme.primary,
-        // Match the 20dp card gutter (16dp ListItem default + 4dp nudge = 20dp)
         modifier = Modifier.padding(start = 36.dp, top = 24.dp, bottom = 8.dp),
     )
 }

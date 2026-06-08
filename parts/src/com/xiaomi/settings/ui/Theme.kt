@@ -105,12 +105,12 @@ object Motion {
     private val EmphasizedAccelerate = CubicBezierEasing(0.3f, 0f, 0.8f, 0.15f)
 
     fun <T> navSpatialSpec(): FiniteAnimationSpec<T> = spring(
-        dampingRatio = Spring.DampingRatioLowBouncy,
-        stiffness    = Spring.StiffnessMediumLow,
+        dampingRatio = Spring.DampingRatioNoBouncy,
+        stiffness    = Spring.StiffnessLow,
     )
 
     fun <T> navEffectsSpec(): FiniteAnimationSpec<T> =
-        tween(durationMillis = 150, easing = EmphasizedDecelerate)
+        tween(durationMillis = 300, easing = EmphasizedDecelerate)
 
     fun <T> defaultEffectsSpec(): FiniteAnimationSpec<T> = spring(
         dampingRatio = Spring.DampingRatioMediumBouncy,

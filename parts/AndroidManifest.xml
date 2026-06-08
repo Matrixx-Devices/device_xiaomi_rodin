@@ -97,17 +97,9 @@
                 android:resource="@drawable/ic_xiaomi_parts" />
             
             <meta-data
-                android:name="com.android.settings.icon_color_scheme" 
-                android:value="cyan"/>
-
-            <meta-data
-                android:name="com.android.settings.bg.hint"
-                android:resource="@color/settings_background_icon_color" />
-
-            <meta-data
-                android:name="com.android.settings.bg.argb"
-                android:value="-16725933" />
-
+                android:name="com.android.settings.icon_tintable"
+                android:value="true" />
+            
             <meta-data
                 android:name="com.android.settings.keyhint"
                 android:value="top_level_xiaomi_parts" />

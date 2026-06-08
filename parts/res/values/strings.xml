@@ -98,10 +98,10 @@
     <string name="touch_boost_failed">Touch boost failed to apply</string>
 
     <!-- ── Diagnostics ─────────────────────────────────────── -->
-    <string name="fingerprint_calibration_title">Fingerprint calibration</string>
+    <string name="cit_calibration_title">CIT</string>
+    <string name="cit_calibration_summary">Hardware diagnostic tool</string>
+    <string name="cit_calibration_not_found">CIT not available</string>
+    <string name="fingerprint_calibration_title">Jiiov FP Calibration</string>
     <string name="fingerprint_calibration_summary">Recalibrate the fingerprint sensor</string>
     <string name="fingerprint_calibration_not_found">Fingerprint calibration not available</string>
-    <string name="speaker_calibration_title">Speaker calibration</string>
-    <string name="speaker_calibration_summary">CIT speaker self-calibration test</string>
-    <string name="speaker_calibration_not_found">Speaker calibration not available</string>
 </resources>
