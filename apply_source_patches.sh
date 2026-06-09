@@ -16,6 +16,7 @@ echo "======================================"
 
 # Array of patches: "Destination_Repo_Path Patch_File_Name"
 PATCHES=(
+    "packages/modules/Bluetooth 0001-Add-L2CAP-and-A2DP-offload-coex-mechanism-for-MTK.patch"
     "packages/apps/Aperture 0001-Aperture-Allow-disabling-video-stabilization.patch"
     "packages/apps/Aperture 0001-Aperture-Enable-MediaTek-HFPS-Mode-for-60-FPS-video-.patch"
 )
